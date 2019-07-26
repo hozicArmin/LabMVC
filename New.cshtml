@@ -1,0 +1,27 @@
+﻿@model LabMVC.ViewModels.MovieFormViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Movie</h2>
+
+@using (Html.BeginForm("Edit", "Movies"))
+{
+    <div class="form-group">
+        @Html.LabelFor(mod => mod.Name)
+        @Html.TextBoxFor(mod => mod.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(mod => mod.ReleaseDate)
+        @Html.TextBoxFor(mod => mod.ReleaseDate, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(mod => mod.GenreId)
+        @Html.DropDownListFor(mod => mod.GenreId, new SelectList(Model.Genres ,"Id", "Name"), "", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(mod => mod.NumberInStock)
+        @Html.TextBoxFor(mod => mod.NumberInStock, new { @class = "form-control" })
+    </div>
+}

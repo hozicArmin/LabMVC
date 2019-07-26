@@ -1,0 +1,39 @@
+﻿@model LabMVC.ViewModels.MovieFormViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Model.Title + "Nesto"</h2>
+
+@using (Html.BeginForm("Save", "Movies"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors")
+    <div class="form-group">
+        @Html.LabelFor(mod => mod.Name)
+        @Html.TextBoxFor(mod => mod.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(mod => mod.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(mod => mod.ReleaseDate)
+        @Html.TextBoxFor(mod => mod.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(mod => mod.ReleaseDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(mod => mod.GenreId)
+        @Html.DropDownListFor(mod => mod.GenreId, new SelectList(Model.Genres, "Id", "Name"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(mod => mod.GenreId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(mod => mod.NumberInStock)
+        @Html.TextBoxFor(mod => mod.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(mod => mod.NumberInStock)
+    </div>
+    @Html.HiddenFor(mod => mod.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
